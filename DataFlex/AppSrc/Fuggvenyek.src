@@ -1,0 +1,20 @@
+Use DfAllEnt.pkg
+
+Function MultiplybyFive Integer iVal Returns Integer
+    Function_Return (iVal*5)
+End_Function
+
+Procedure UppercaseDesc String ByRef sDesc
+    Move (Uppercase(sDesc)) to sDesc
+End_Procedure
+
+Procedure Feladat Integer iNum String sDesc
+    Get MultiplybyFive iNum to iNum
+    Move (MultiplybyFive(Self,iNum)) to iNum
+    Send UppercaseDesc (&sDesc)
+    Send Info_Box (SFormat("Feladat: %1, %2", iNum, sDesc)) "Hello"
+End_Procedure
+
+
+Send Feladat 4 "Valami"
+Send Feladat 12 "valami 2"
