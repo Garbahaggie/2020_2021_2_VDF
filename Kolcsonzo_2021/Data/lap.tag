@@ -1,0 +1,13 @@
+lapid
+berlo
+kezdat
+vegdat
+kiado
+beveno
+status
+osszertek
+osszmenny
+crdt
+crtime
+lmdt
+lmtime
