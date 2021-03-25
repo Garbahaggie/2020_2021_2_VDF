@@ -15,6 +15,8 @@ Object oMedia_tipusVT is a DescriptionValidationTable
     End_Procedure
 End_Object
 
+Register_Object media_sl
+
 Class cmediaDataDictionary is a DataDictionary
     
     Procedure Construct_Object
@@ -36,18 +38,22 @@ Class cmediaDataDictionary is a DataDictionary
         Set Field_Label_Short Field media.mediaid to "Azon."
         Set Key_Field_State Field media.mediaid to True
         Set Field_Auto_Increment Field media.mediaid to File_Field system.mediaid
+        Set Field_Prompt_Object Field media.mediaid to media_sl
 
         Set Field_Label_Long Field media.nev to "N‚v"
         Set Field_Label_Short Field media.nev to "N‚v"
         Set Field_Option Field media.nev DD_REQUIRED to True
+        Set Field_Prompt_Object Field media.nev to media_sl
 
         Set Field_Label_Long Field media.szerzo to "Szerz‹"
         Set Field_Label_Short Field media.szerzo to "Szerz‹"
+        Set Field_Prompt_Object Field media.szerzo to media_sl
 
         Set Field_Label_Long Field media.tipus to "T¡pus"
         Set Field_Label_Short Field media.tipus to "T¡pus"
         Set Field_Value_Table Field media.tipus to oMedia_tipusVT
         Set Field_Class_Name Field media.tipus to "Combo"
+        Set Field_Prompt_Object Field media.tipus to media_sl
 
         Set Field_Label_Long Field media.datum to "Be‚rkez‚s d tum"
         Set Field_Label_Short Field media.datum to "D tum"
@@ -65,3 +71,8 @@ Class cmediaDataDictionary is a DataDictionary
     End_Procedure
 
 End_Class
+
+#IFDEF Is$WebApp
+#ELSE
+Use media.sl
+#ENDIF
