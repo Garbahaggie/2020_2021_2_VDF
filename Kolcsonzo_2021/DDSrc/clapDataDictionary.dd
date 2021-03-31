@@ -1,5 +1,7 @@
 Use DataDict.pkg
 
+Use myfunctions.pkg
+
 Open lap
 Open system
 Open berlo
@@ -62,7 +64,7 @@ Class clapDataDictionary is a DataDictionary
         Get_Attribute DF_FILE_CHANGED of iFile to bChanged
         If (bChanged) Begin
             Sysdate lap.lmdt
-            //Move(Ido_belyeg_csakido()) to lap.lmtime
+            Move (Ido_belyeg(Self)) to lap.lmtime
         End
         Forward Send Save_Main_File
     End_Procedure
@@ -70,7 +72,7 @@ Class clapDataDictionary is a DataDictionary
     Procedure Creating
         Forward Send Creating
         Sysdate lap.crdt
-        //Move(Ido_belyeg_csakido()) to lap.crtime
+        Move (Ido_belyeg(Self)) to lap.crtime
     End_Procedure
 
     Procedure Field_Defaults

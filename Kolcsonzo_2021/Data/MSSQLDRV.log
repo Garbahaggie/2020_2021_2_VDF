@@ -1,0 +1,193 @@
+////////////////////////////////////////////////////////////
+Starting conversion at 31/03/2021 17:01:17.128
+////////////////////////////////////////////////////////////
+
+------------------------------------------------------------
+Converting Recnum table: 1, ember, ember
+Start time: 31/03/2021 17:01:17.135
+Starting restructure transaction.
+Creating new table.
+Creating primary key ember001_PK.
+Creating index ember002.
+Creating index ember000.
+Creating intermediate file.
+Commit restructure transaction.
+Temporary delete of all indices of table ember.
+Dropping primary key ember001_PK.
+Dropping index ember000.
+Dropping index ember002.
+All records copied.
+Re-creating temporary deleted indices of table ember.
+Creating primary key ember001_PK.
+Creating index ember000.
+Creating index ember002.
+End time: 31/03/2021 17:01:18.334
+Total time to convert table: 0:0:0:1.199
+
+------------------------------------------------------------
+Converting Recnum table: 2, system, system
+Start time: 31/03/2021 17:01:18.358
+Starting restructure transaction.
+Creating new table.
+Creating intermediate file.
+Commit restructure transaction.
+Temporary delete of all indices of table system.
+All records copied.
+Re-creating temporary deleted indices of table system.
+End time: 31/03/2021 17:01:19.278
+Total time to convert table: 0:0:0:0.92
+
+------------------------------------------------------------
+Converting Recnum table: 3, media, media
+Start time: 31/03/2021 17:01:19.291
+Starting restructure transaction.
+Creating new table.
+Creating primary key media001_PK.
+Creating index media002.
+Creating index media003.
+Creating index media004.
+Creating index media005.
+Creating index media000.
+Creating intermediate file.
+Commit restructure transaction.
+Temporary delete of all indices of table media.
+Dropping primary key media001_PK.
+Dropping index media000.
+Dropping index media002.
+Dropping index media003.
+Dropping index media004.
+Dropping index media005.
+All records copied.
+Re-creating temporary deleted indices of table media.
+Creating primary key media001_PK.
+Creating index media000.
+Creating index media002.
+Creating index media003.
+Creating index media004.
+Creating index media005.
+End time: 31/03/2021 17:01:20.894
+Total time to convert table: 0:0:0:1.603
+
+------------------------------------------------------------
+Converting Recnum table: 4, berlo, berlo
+Start time: 31/03/2021 17:01:20.903
+Starting restructure transaction.
+Creating new table.
+Creating primary key berlo001_PK.
+Creating index berlo002.
+Creating index berlo000.
+Creating intermediate file.
+Commit restructure transaction.
+Temporary delete of all indices of table berlo.
+Dropping primary key berlo001_PK.
+Dropping index berlo000.
+Dropping index berlo002.
+All records copied.
+Re-creating temporary deleted indices of table berlo.
+Creating primary key berlo001_PK.
+Creating index berlo000.
+Creating index berlo002.
+End time: 31/03/2021 17:01:22.038
+Total time to convert table: 0:0:0:1.135
+
+------------------------------------------------------------
+Converting Recnum table: 5, lap, lap
+Start time: 31/03/2021 17:01:22.053
+Starting restructure transaction.
+Creating new table.
+Creating primary key lap001_PK.
+Creating index lap002.
+Creating index lap000.
+Creating intermediate file.
+Commit restructure transaction.
+Temporary delete of all indices of table lap.
+Dropping primary key lap001_PK.
+Dropping index lap000.
+Dropping index lap002.
+All records copied.
+Re-creating temporary deleted indices of table lap.
+Creating primary key lap001_PK.
+Creating index lap000.
+Creating index lap002.
+End time: 31/03/2021 17:01:23.354
+Total time to convert table: 0:0:0:1.301
+
+------------------------------------------------------------
+Converting Recnum table: 6, laptetel, laptetel
+Start time: 31/03/2021 17:01:23.367
+Starting restructure transaction.
+Creating new table.
+Creating primary key laptetel001_PK.
+Creating index laptetel000.
+Creating intermediate file.
+Commit restructure transaction.
+Temporary delete of all indices of table laptetel.
+Dropping primary key laptetel001_PK.
+Dropping index laptetel000.
+All records copied.
+Re-creating temporary deleted indices of table laptetel.
+Creating primary key laptetel001_PK.
+Creating index laptetel000.
+End time: 31/03/2021 17:01:24.267
+Total time to convert table: 0:0:0:0.9
+
+------------------------------------------------------------
+Converting Recnum table: 7, varosok, varosok
+Start time: 31/03/2021 17:01:24.285
+Starting restructure transaction.
+Creating new table.
+Creating primary key varosok001_PK.
+Creating index varosok000.
+Creating intermediate file.
+Commit restructure transaction.
+Temporary delete of all indices of table varosok.
+Dropping primary key varosok001_PK.
+Dropping index varosok000.
+All records copied.
+Re-creating temporary deleted indices of table varosok.
+Creating primary key varosok001_PK.
+Creating index varosok000.
+End time: 31/03/2021 17:01:25.788
+Total time to convert table: 0:0:0:1.503
+
+------------------------------------------------------------
+Converting Recnum table: 253, CodeType, Code Maintenance Type Table
+Start time: 31/03/2021 17:01:25.803
+Starting restructure transaction.
+Creating new table.
+Creating primary key CodeType001_PK.
+Creating index CodeType000.
+Creating intermediate file.
+Commit restructure transaction.
+Temporary delete of all indices of table CodeType.
+Dropping primary key CodeType001_PK.
+Dropping index CodeType000.
+All records copied.
+Re-creating temporary deleted indices of table CodeType.
+Creating primary key CodeType001_PK.
+Creating index CodeType000.
+End time: 31/03/2021 17:01:26.592
+Total time to convert table: 0:0:0:0.789
+
+------------------------------------------------------------
+Converting Recnum table: 254, CodeMast, Code Maintenance Code Table
+Start time: 31/03/2021 17:01:26.616
+Starting restructure transaction.
+Creating new table.
+Creating primary key CodeMast001_PK.
+Creating index CodeMast000.
+Creating intermediate file.
+Commit restructure transaction.
+Temporary delete of all indices of table CodeMast.
+Dropping primary key CodeMast001_PK.
+Dropping index CodeMast000.
+All records copied.
+Re-creating temporary deleted indices of table CodeMast.
+Creating primary key CodeMast001_PK.
+Creating index CodeMast000.
+End time: 31/03/2021 17:01:27.493
+Total time to convert table: 0:0:0:0.877
+////////////////////////////////////////////////////////////
+Finished conversion at 31/03/2021 17:01:27.502
+Total conversion time: 0:0:0:10.372
+////////////////////////////////////////////////////////////
