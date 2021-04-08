@@ -154,13 +154,46 @@ Object oMain is a Panel
                         Send Activate_oKolcsonzesilap of hoClient
                     End_Procedure
                 End_Object
+
+                Object oAdoszamlekerMenuItem is a cCJMenuItem
+                    Set psCaption to "Adoszamleker"
+                    Set psTooltip to "Adoszamleker"
+                
+                    Procedure OnExecute Variant vCommandBarControl
+                        Handle hoClient
+                        Get Client_Id to hoClient
+                        Send Activate_oAdoszamleker of hoClient
+                    End_Procedure
+                End_Object
             End_Object
             
             Object oReportMenu is a cCJMenuItem
-                Set peControlType to xtpControlPopup          
+                Set peControlType to xtpControlPopup
                 Set psCaption to "&Jelent‚s"
                 Set psToolTip to "Jelent‚s"
                 Set psDescription to "Lehets‚ges Report-ok"
+
+                Object ohavikimutatMenuItem is a cCJMenuItem
+                    Set psCaption to "havi_kimutat"
+                    Set psTooltip to "havi_kimutat"
+                
+                    Procedure OnExecute Variant vCommandBarControl
+                        Handle hoClient
+                        Get Client_Id to hoClient
+                        Send Activate_ohavi_kimutatReportView of hoClient
+                    End_Procedure
+                End_Object
+
+                Object oMediaklistaMenuItem is a cCJMenuItem
+                    Set psCaption to "Mediak_lista"
+                    Set psTooltip to "Mediak_lista"
+                
+                    Procedure OnExecute Variant vCommandBarControl
+                        Handle hoClient
+                        Get Client_Id to hoClient
+                        Send Activate_oMediak_lista of hoClient
+                    End_Procedure
+                End_Object
             End_Object
 
             Object oNavigateMenu is a cCJMenuItem
@@ -370,6 +403,9 @@ Object oMain is a Panel
         Use Varosobetolt.vw
         Use Berlo_rogz.vw
         Use Kolcsonzesilap.vw
+        Use havi_kimutatReport.rv
+        Use Mediak_lista.rv
+        Use Adoszamleker.vw
 
         Procedure Activate_About
             Send DoAbout "" "" "" "" ""

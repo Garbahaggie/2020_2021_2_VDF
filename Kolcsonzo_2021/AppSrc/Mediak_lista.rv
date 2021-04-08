@@ -1,0 +1,490 @@
+// Mediak_lista.rv
+// Mediak_lista
+Register_Object oReport
+Use DFRptVw.pkg
+Use cWinReport2.pkg
+Use Windows.pkg
+
+Use cemberDataDictionary.dd
+Use cmediaDataDictionary.dd
+
+ACTIVATE_VIEW Activate_oMediak_lista FOR oMediak_lista
+Object oMediak_lista is a ReportView
+    Set Location to 6 6
+    Set Size to 100 202
+    Set Label To "Mediak_lista"
+
+
+    Object oember_DD is a cemberDataDictionary
+        Property String psStartNEV
+        Property String psStopNEV
+
+        Procedure OnConstrain 
+            String sStart sStop
+
+            Get psStartNEV To sStart
+            Get psStopNEV To sStop
+
+            Case Begin
+                Case (sStart <> "" and sStop <> "")
+                    Constrain ember.NEV between sStart and sStop
+                    Case Break
+                Case (sStart <> "")
+                    Constrain ember.NEV GE sStart
+                    Case Break
+                Case (sStop <> "")
+                    Constrain ember.NEV LE sStop
+            Case End
+        End_Procedure 
+    End_Object 
+
+    Object omedia_DD is a cmediaDataDictionary
+        Set DDO_Server To oember_DD
+        Set Constrain_File To ember.File_Number
+    End_Object 
+
+    Set Main_DD To oember_DD
+
+
+
+    Object oNEVSelection is a Group
+        Set Size to 35 179
+        Set Location to 5 12
+        Set Label to "Select N‚v"
+
+        Object oSelStart is a Form
+            Set Label to "From:"
+            Set Size to 12 60
+            Set Location to 13 30
+            Set Status_Help to "First value in selection range."
+            Set Label_Col_Offset to 2
+            Set Label_Justification_Mode to jMode_Right
+        End_Object 
+
+        Object oSelStop is a Form
+            Set Label to "To:"
+            Set Size to 12 60
+            Set Location to 13 111
+            Set Status_Help to "Last value in selection range."
+            Set Label_Col_Offset to 2
+            Set Label_Justification_Mode to jMode_Right
+        End_Object 
+
+
+        Function StartValue returns String
+            string sValue
+            Get Value of oSelStart to sValue
+            Function_Return sValue
+        End_Function 
+
+        Function StopValue returns String
+            string sValue
+            Get Value of oSelStop to sValue
+            Function_Return sValue
+        End_Function 
+
+    End_Object 
+
+    Object oPrintTo is a RadioGroup
+        Set Size to 38 118
+        Set Location to 50 12
+        Set Label to "Send Report to"
+
+        Object oRadio1 is a Radio
+            Set Label to "Report Viewer"
+            Set Size to 10 61
+            Set Location to 12 6
+            Set Status_Help to "Prints the report to screen"
+        End_Object 
+
+        Object oRadio2 is a Radio
+            Set Label to "Printer"
+            Set Size to 10 42
+            Set Location to 24 6
+            Set Status_Help to "Prints the report to printer"
+        End_Object 
+
+
+        Function IsToPrinter Returns Boolean
+            integer iRadio
+            Get Current_Radio to iRadio
+            Function_Return (iRadio=1)
+        End_Function 
+
+    End_Object 
+
+    Object oBtnPrint is a Button
+        Set Label to "Print"
+        Set Location to 45 140
+        Set Status_Help to "Print the selected report"
+        Set Default_State to TRUE
+        Procedure OnClick
+            Send StartReport
+        End_Procedure
+    End_Object 
+
+    Object oBtnPrinterSetup is a Button
+        Set Label to "Printer Setup"
+        Set Location to 62 140
+        Set Status_Help to "Set up printer for report"
+        Procedure OnClick
+            Send DFPrintSetup of oReport
+        End_Procedure
+    End_Object 
+
+    Object oBtnCancel is a Button
+        Set Label to "Cancel"
+        Set Location to 79 140
+        Set Status_Help to "Close this Panel"
+        Procedure OnClick
+            Send Close_Panel
+        End_Procedure
+    End_Object 
+
+
+
+    Object oReport is a cWinReport2
+
+        Set Report_Title to "Mediak_lista"
+        Object oReport2 is a cWinReport2
+
+
+            // Set DDO, Index and breaks for the report
+            Set Server to omedia_DD
+            Set Ordering to 5
+            Procedure Body 
+                string  sFont 
+                integer iFontSize iStyle
+
+                Move "arial" to sFont
+                Move 10 to iFontSize
+                Move (font_default) to iStyle
+
+                DFFont sFont
+                DFFontSize iFontSize
+
+                DFWritePos media.nev                      0.08 iStyle -1 10.66
+                DFWritePos media.szerzo                   10.82 iStyle -1 10.66
+                DFWriteLn
+                DFWritePos media.tipus                    1.08 iStyle -1 2.13
+                DFWritePos media.datum                    3.29 iStyle -1 2.13
+                DFWritePos media.ar                       (5.5 + 1.91) (iStyle + Font_Right) 2 1.91
+                DFWriteLn
+                Send Add_SubTotal 4 media.ar                      
+
+            End_Procedure 
+
+        End_Object 
+
+        // Set DDO, Index and breaks for the report
+        Set Server to oember_DD
+        Set Ordering to 2
+        Report_Breaks (SerializeRowId(GetRowId(ember.File_Number)))
+
+        Function Starting_Main_Report Returns Integer
+            Boolean bErr
+            Send DFSetMetrics wpm_cm
+            Send DFSetmargins 1 1 1 1
+            //Send DFSetLandscape false // This can be used to force a page orientation
+            Forward Get Starting_Main_Report to bErr
+            Function_return bErr
+        End_Function 
+
+        // Page_Top is printed first at the top margin of each page
+        Procedure Page_Top 
+            string  sFont
+            integer iFontSize
+
+            Move "arial" to sFont
+            Move 10 to iFontSize
+
+            DFFont sFont
+            DFFontSize iFontSize
+            DFBeginHeader DFPageTop
+                DFHeaderFrame Hdr_NoFrame
+                DFHeaderPos   Hdr_Left
+                DFWriteLn ("Page:" * "#pagecount#") (Font_Right)
+            DFEndHeader
+
+        End_Procedure 
+
+        // Report_Header is printed once in a report after Page_Top
+        //Procedure Report_Header
+        //    string  sFont
+        //    integer iFontSize
+        //    Move "arial" to sFont
+        //    Move 10 to iFontSize
+        //    DFFont sFont
+        //    DFFontSize iFontSize
+        //    DFBeginHeader  DFReportHeader
+        //        DFHeaderFrame  Hdr_Margins 0.01
+        //        DFHeaderPos    Hdr_Left
+        //        DFHeaderMargin HM_BottomOuter 0.08
+        //        DFWrite     "Report_Header" (Font_Bold+Font_Center)
+        //    DFEndHeader
+        //End_Procedure
+
+        Procedure Page_Header 
+            integer iFill iBorder iStyle
+            string  sFont sReportTitle
+            integer iFontSize
+
+            Move "arial" to sFont
+            Move 16 to iFontSize
+            Move (Font_bold + rgb_White) to iStyle
+            Move (rgb_dGrey) to iFill
+            Move (rgb_dGrey) to iBorder
+            Get Report_Title to sReportTitle
+
+            DFFont sFont
+            DFFontSize iFontSize
+            DFBeginHeader DFPageHeader
+                DFHeaderPos   Hdr_Left
+                DFHeaderFrame Hdr_Margins 0.01 iBorder iFill
+                DFWritelnPos sReportTitle 0.1 iStyle
+                DFHeaderMargin HM_BottomOuter 0.08
+            DFEndHeader
+
+        End_Procedure 
+
+        // Page_Title appears on every page after Page_Header
+        //Procedure Page_Title
+        //    string  sFont
+        //    integer iFontSize
+        //    Move "arial" to sFont
+        //    Move 10 to iFontSize
+        //    DFFont sFont
+        //    DFFontSize iFontSize
+        //    DFBeginHeader  DFPageTitle
+        //        DFHeaderFrame  Hdr_Margins 0.01
+        //        DFHeaderPos    Hdr_Left
+        //        DFHeaderMargin HM_BottomOuter 0.08
+        //        DFWrite     "Page_Title" (Font_Bold+Font_Center)
+        //    DFEndHeader
+        //End_Procedure
+
+        Procedure SubHeader1 
+            string  sFont 
+            integer iFontSize iStyle
+            integer iFill iBorder iHeaderStyle
+
+
+            // If (Page_end_State(self)) Begin // Page_end_State must get set in subtotal 1
+            //    Send DFNew_Page // this will force a new page
+            // End
+
+            Move "arial" to sFont
+            Move 10 to iFontSize
+            Move (font_bold) to iStyle
+            Move (Font_Bold + rgb_dBlue) to iHeaderStyle
+            Move (rgb_dGrey) to iBorder
+            Get DFGetDFColor 242 242 242 to iFill
+
+            DFFont sFont
+            DFFontSize iFontSize
+            DFBeginHeader DFSubHeader 1
+                DFHeaderLineCheck 5
+                DFHeaderWrap   HDR_Wrap
+                DFHeaderPos    HDR_Left
+                DFHeaderFrame  Hdr_Margins 0.01 iBorder iFill
+                DFHeaderMargin hm_BottomOuter 0.08
+                DFHeaderMargin hm_TopInner    0.04
+                DFHeaderMargin hm_BottomInner 0.04
+
+                // display fields to be placed in this sub-header
+                DFWritePos "Azonos¡t¢:"                  0.1 iHeaderStyle -1 4.9
+                DFWritePos ember.ID                       5 (iStyle + Font_Right) 0
+                DFWriteLn
+                DFWritePos "N‚v:"                        0.1 iHeaderStyle -1 4.9
+                DFWritePos ember.NEV                      5 iStyle -1
+                DFWriteLn
+
+                // write the heading for the body section
+                DFFontSize 1 // create a very small space on top of and below the horizontal bar
+                DFWriteLn
+                DFWriteLine DFGR_CURRLINE DFGR_CURRLINE DFGR_RB_MARGIN DFGR_HORI iBorder
+                DFWriteLn
+                DFFontSize iFontSize
+                DFWritePos "N‚v"                          0.08 iHeaderStyle -1 10.66
+                DFWritePos "Szerz‹"                       10.82 iHeaderStyle -1 10.66
+                DFWriteLn
+                DFWritePos "T¡pus"                        1.08 iHeaderStyle -1 2.13
+                DFWritePos "D tum"                        3.29 iHeaderStyle -1 2.13
+                DFWritePos "µr"                           (5.5 + 1.91) (iHeaderStyle + Font_Right) -1 1.91
+                DFWriteLn
+
+            DFEndHeader
+
+        End_Procedure 
+
+        Procedure SubTotal1 
+            string  sFont 
+            integer iFontSize iStyle iFill iBorder
+            number  nAmount
+
+            Move "arial" to sFont
+            Move 10 to iFontSize
+            Move (font_bold) to iStyle
+            Move (rgb_dGrey) to iBorder
+            Get DFGetDFColor 242 242 242 to iFill
+
+            DFFont sFont
+            DFFontSize iFontSize
+            DFBeginHeader DFSubTotal 1
+                DFHeaderPos   Hdr_Left
+                DFHeaderWrap  Hdr_NoWrap
+                DFHeaderFrame HDR_Margins 0.01 iBorder iFill
+                DFHeaderMargin HM_BottomOuter 0.16
+                DFHeaderMargin HM_TopInner 0.04
+                DFHeaderMargin HM_BottomInner 0.04
+                DFHeaderFrame Hdr_Margins 0.01 iBorder iFill
+
+                Get SubTotal ( 4 + 0) to nAmount
+                Send Add_SubTotal ( 4 + 5) nAmount
+                DFWritePos nAmount (5.5 + 1.91) (iStyle + Font_Right) 2 1.91
+                DFWriteLn
+            DFEndHeader
+
+            // Set Page_end_State to True // force a page-break when this section ends
+
+        End_Procedure 
+
+        Procedure Total 
+            string  sFont 
+            integer iFontSize iStyle iFill iBorder
+            number  nAmount
+
+            Move "arial" to sFont
+            Move 10 to iFontSize
+            Move (font_bold) to iStyle
+            Move (rgb_Grey) to iFill
+            Move (rgb_dGrey) to iBorder
+
+            DFFont sFont
+            DFFontSize iFontSize
+            DFBeginHeader DFTotal
+                DFHeaderPos   Hdr_Left
+                DFHeaderFrame Hdr_Margins 0.01 iBorder iFill
+
+                Get SubTotal ( 4 + 5) to nAmount
+                DFWritePos nAmount (5.5 + 1.91) (iStyle + Font_Right) 2 1.91
+                DFWriteLn
+            DFEndHeader
+
+        End_Procedure 
+
+        // Report_Footer is printed once on the last page before Page_Footer
+        //Procedure Report_Footer
+        //    string  sFont
+        //    integer iFontSize
+        //    Move "arial" to sFont
+        //    Move 10 to iFontSize
+        //    DFFont sFont
+        //    DFFontSize iFontSize
+        //    DFBeginHeader DFReportFooter
+        //        DFHeaderFrame  Hdr_Margins 0.01
+        //        DFHeaderPos    Hdr_Left
+        //        DFHeaderMargin HM_BottomOuter 0.08
+        //        DFWrite     "Report_Footer" (Font_Bold+Font_Center)
+        //    DFEndHeader
+        //End_Procedure
+
+        Procedure Page_Footer 
+            string sStart sStop sText
+            string  sFont 
+            integer iFontSize iStyle
+            handle  hoDD
+
+            Move "arial" to sFont
+            Move 10 to iFontSize
+            Move (font_default) to iStyle
+
+            Get Server To hoDD
+
+            DFFont sFont
+            DFFontSize iFontSize
+            DFBeginHeader DFPageFooter
+                DFHeaderFrame hdr_NoFrame
+                DFHeaderPos   hdr_Left
+
+                Get psStartNEV of hoDD to sStart
+                Get psStopNEV  of hoDD to sStop
+                Get SelectionCriteraDescription "ember.NEV" sStart sStop to sText
+                If (sText<>"") begin
+                    DFWriteLnPos sText 0.1
+                end
+
+            DFEndHeader
+        End_Procedure 
+
+        // Page_Bottom is printed last at the bottom margin of each page
+        Procedure Page_Bottom 
+            string sFont
+            integer iFontSize iBorder iStyle
+            DateTime dtDT
+
+            Move (CurrentDateTime()) to dtDT
+
+            Move "arial" to sFont
+            Move 10 to iFontSize
+            Move (font_default) to iStyle
+            Move (rgb_dGrey) to iBorder
+
+            DFFont sFont
+            DFFontSize iFontSize
+            DFBeginHeader DFPageBottom
+                DFHeaderFrame Hdr_Margins 0.01 iBorder
+                DFHeaderPos Hdr_Left
+                DFWriteln ("Report Printed on" * string(dtDT)) (iStyle+Font_Center)
+            DFEndHeader
+
+        End_Procedure 
+
+        // Returns string with description of selection ranges
+        // Pass: Selection title, start value and end value. Return: description
+        Function SelectionCriteraDescription string sTitle string sStart string sStop returns String
+            string sText
+            If (sStart=""  AND sStop="") ;
+                function_return ""
+            If (sStart="0" AND sStop="0") ;
+                function_return ""
+            If (sStart<>"" AND sStop<>"") begin
+                Move ("between" * sStart * "and" * sStop) to sText
+            end
+            Else if (sStart > "") Begin
+                Move ("starting at" * sStart) to sText
+            end
+            Else if (sStop > "") begin
+                Move ("up to" * sStop) to sText
+            End
+            function_return (sTitle * sText)
+        End_Function
+
+    End_Object 
+
+    Procedure StartReport 
+        Boolean bToPrinter
+        Handle hoDD
+        String sValue
+        String sStart sStop
+
+        Get Server of oReport To hoDD
+
+        // Set all selection critera properties
+        Get StartValue of oNEVSelection to sValue
+        Set psStartNEV of hoDD To sValue
+
+        Get StopValue of oNEVSelection to sValue
+        Set psStopNEV of hoDD To sValue
+
+
+        // determine if direct print
+        Get IsToPrinter of oPrintTo to bToPrinter
+        Set OutPut_Device_Mode of oReport to (If(bToPrinter, PRINT_TO_PRINTER, PRINT_TO_WINDOW))
+
+        // run the report
+        Send Run_Report of oReport
+
+    End_Procedure 
+
+End_Object 
