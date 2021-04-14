@@ -1,5 +1,6 @@
-Use AllWebAppClasses.pkg
+﻿Use AllWebAppClasses.pkg
 Use cConnection.pkg
+Use cWebMenuItemLoadView.pkg
 
 Object oApplication is a cApplication
 
@@ -89,6 +90,21 @@ Object oWebApp is a cWebApp
     
             Object oViewMenu is a cWebMenuItem
                 Set psCaption to C_$View
+
+                Object oHelloWorldItem1 is a cWebMenuItemLoadView
+                    Set psCaption to "HelloWorld"
+                    Set psLoadViewOnClick to "oHelloWorld"
+                End_Object
+
+                Object oEmberekkarbantartsaItem1 is a cWebMenuItemLoadView
+                    Set psCaption to "Emberek karbantartása"
+                    Set psLoadViewOnClick to "oEmber_rogz"
+                End_Object
+
+                Object oMdiakarbantartsaItem1 is a cWebMenuItemLoadView
+                    Set psCaption to "Média karbantartása"
+                    Set psLoadViewOnClick to "oMedia_rogz"
+                End_Object
             End_Object  
         End_Object  
         
@@ -132,6 +148,9 @@ Object oWebApp is a cWebApp
     Use SessionManager.wo
     Use LoginDialog.wo
     Use WebResourceManager.wo
+    Use HelloWorld.wo
+    Use Ember_rogz.wo
+    Use Media_rogz.wo
     
 End_Object
 

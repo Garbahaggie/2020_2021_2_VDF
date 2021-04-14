@@ -1,13 +1,14 @@
 [Properties]
-Version=19.1
+Version=20.0
 [WorkspacePaths]
 ConfigFile=.\Programs\Config.ws
 [Preferences]
 DefaultFormHeight=12
 [Conditionals]
 Is$WebApp=True
-[Libraries]
-Lib1=Libraries\DataFlex Reports\DataFlex Reports 19.1.sws
+Is$Win64=True
 [Projects]
 Project0=Kolcsonzo.src
 Project1=WebApp.src
+[Libraries]
+Lib1=Libraries\DataFlex Reports\20.0\DataFlex Reports.sws
