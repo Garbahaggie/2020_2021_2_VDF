@@ -105,6 +105,16 @@ Object oWebApp is a cWebApp
                     Set psCaption to "Média karbantartása"
                     Set psLoadViewOnClick to "oMedia_rogz"
                 End_Object
+
+                Object oBrlkkarbantartsaItem1 is a cWebMenuItemLoadView
+                    Set psCaption to "Bérlők karbantartása"
+                    Set psLoadViewOnClick to "oBerlo_rogz"
+                End_Object
+
+                Object oKlcsnzsilapItem1 is a cWebMenuItemLoadView
+                    Set psCaption to "Kölcsönzési lap"
+                    Set psLoadViewOnClick to "oLaprogz"
+                End_Object
             End_Object  
         End_Object  
         
@@ -151,6 +161,8 @@ Object oWebApp is a cWebApp
     Use HelloWorld.wo
     Use Ember_rogz.wo
     Use Media_rogz.wo
+    Use Berlo_rogz.wo
+    Use Laprogz.wo
     
 End_Object
 

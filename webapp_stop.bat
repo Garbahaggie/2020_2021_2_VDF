@@ -1,0 +1,1 @@
+taskkill /im WebApp.exe /f

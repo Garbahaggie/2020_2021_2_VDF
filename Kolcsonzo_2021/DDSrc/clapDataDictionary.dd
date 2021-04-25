@@ -1,4 +1,4 @@
-Use DataDict.pkg
+ÔªøUse DataDict.pkg
 
 Use myfunctions.pkg
 
@@ -10,14 +10,15 @@ Open laptetel
 Object oLap_StatusVT is a DescriptionValidationTable
     Procedure Fill_List
         Forward Send Fill_List
-        Send Add_Table_Value "0" "Rîgz°tÇs alatt"
-        Send Add_Table_Value "1" "BÇrlã elvitte"
-        Send Add_Table_Value "2" "BÇrlã visszahozta"
-        Send Add_Table_Value "9" "Tîrîlt"
+        Send Add_Table_Value "0" "R√∂gz√≠t√©s alatt"
+        Send Add_Table_Value "1" "B√©rl√Ø elvitte"
+        Send Add_Table_Value "2" "B√©rl√Ø visszahozta"
+        Send Add_Table_Value "9" "T√∂r√∂lt"
     End_Procedure
 End_Object
 
 Register_Object lap_sl
+Register_Object olapWebLookup
 
 Class clapDataDictionary is a DataDictionary
     
@@ -39,6 +40,7 @@ Class clapDataDictionary is a DataDictionary
         Set Key_Field_State Field lap.lapid to True
         Set Field_Auto_Increment Field lap.lapid to File_Field system.lapid
         Set Field_Prompt_Object Field lap.lapid to lap_sl
+        Set Field_WebPrompt_Object Field lap.lapid to olapWebLookup
 
         Set Field_Class_Name Field lap.status to "Combo"
         Set Field_Value_Table Field lap.status to oLap_StatusVT
@@ -87,21 +89,21 @@ Class clapDataDictionary is a DataDictionary
         If (not(iRetVal)) Begin
             If (lap.status eq "1") Begin
                 If (lap.kezdat eq "") Begin
-                    Error 503 "KezdÇs d†tum†t meg kell adni!"
+                    Error 503 "Kezd√©s d√°tum√°t meg kell adni!"
                     Move 503 to iRetVal
                 End
                 If (lap.kiado eq "") Begin
-                    Error 504 "Kiad¢t meg kell adni!"
+                    Error 504 "Kiad√≥t meg kell adni!"
                     Move 504 to iRetVal
                 End
             End
             If (lap.status eq "2") Begin
                 If (lap.vegdat eq "") Begin
-                    Error 505 "VÇge d†tum†t meg kell adni!"
+                    Error 505 "V√©ge d√°tum√°t meg kell adni!"
                     Move 505 to iRetVal
                 End
                 If (lap.beveno eq "") Begin
-                    Error 506 "Bevevãt meg kell adni!"
+                    Error 506 "Bevev√Øt meg kell adni!"
                     Move 506 to iRetVal
                 End
             End
@@ -112,6 +114,7 @@ Class clapDataDictionary is a DataDictionary
 End_Class
 
 #IFDEF Is$WebApp
+Use lapWebLookup.wo
 #ELSE
 Use lap.sl
 #ENDIF
