@@ -146,10 +146,21 @@ Object oMain is a Panel
             End_Object
             
             Object oReportMenu is a cCJMenuItem
-                Set peControlType to xtpControlPopup          
+                Set peControlType to xtpControlPopup
                 Set psCaption to "&Report"
                 Set psToolTip to "Report"
                 Set psDescription to "Available Reports"
+
+                Object ohavikimutatMenuItem is a cCJMenuItem
+                    Set psCaption to "havi_kimutat"
+                    Set psTooltip to "havi_kimutat"
+                
+                    Procedure OnExecute Variant vCommandBarControl
+                        Handle hoClient
+                        Get Client_Id to hoClient
+                        Send Activate_ohavi_kimutatReportView of hoClient
+                    End_Procedure
+                End_Object
             End_Object
 
             Object oNavigateMenu is a cCJMenuItem
@@ -358,6 +369,7 @@ Object oMain is a Panel
         Use Cipo.vw
         Use Gyartosor.vw
         Use Munkalap.vw
+        Use havi_kimutatReport.rv
 
         Procedure Activate_About
             Send DoAbout "" "" "" "" ""
