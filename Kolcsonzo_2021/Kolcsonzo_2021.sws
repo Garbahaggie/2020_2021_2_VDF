@@ -5,7 +5,7 @@ ConfigFile=.\Programs\Config.ws
 [Preferences]
 DefaultFormHeight=12
 [Conditionals]
-Is$WebApp=True
+Is$WebApp=False
 Is$Win64=True
 [Libraries]
 Lib1=Libraries\DataFlex Reports\20.0\DataFlex Reports.sws

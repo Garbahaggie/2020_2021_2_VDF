@@ -1,0 +1,91 @@
+﻿Use DataDict.pkg
+
+Open munkatetel
+Open cipo
+Open munkalap
+Open havi
+
+Class cmunkatetelDataDictionary is a DataDictionary
+    
+    Procedure Construct_Object
+        Forward Send Construct_Object
+        Set Main_File to munkatetel.File_Number
+
+        Set Add_System_File to havi.File_Number DD_Lock_On_All
+
+        Set Add_Server_File to cipo.File_Number
+        Set Add_Server_File to munkalap.File_Number
+
+        Set Foreign_Field_Option DD_KEYFIELD DD_NOPUT to True
+        Set Foreign_Field_Option DD_KEYFIELD DD_FINDREQ to True
+        Set Foreign_Field_Option DD_INDEXFIELD DD_NOPUT to True
+        Set Foreign_Field_Option DD_DEFAULT DD_DISPLAYONLY to True
+
+        Set Field_Label_Long Field munkatetel.cipoID to "Cipő azonosító"
+        Set Field_Label_Short Field munkatetel.cipoID to "Cipő"
+        Set Status_Help Field munkatetel.cipoID to "A munka alatt készült cipő azonosítója"
+        Set Field_Option Field munkatetel.cipoID DD_REQUIRED to True
+
+        Set Field_Label_Long Field munkatetel.munkalapID to "Munkalap azonosító"
+        Set Field_Label_Short Field munkatetel.munkalapID to "Munkalap"
+        Set Status_Help Field munkatetel.munkalapID to "A munkához tartozó munkalap azonosítója"
+        Set Field_Option Field munkatetel.munkalapID DD_REQUIRED to True
+
+        Set Field_Label_Long Field munkatetel.ido to "Munkavégzés ideje órákban"
+        Set Field_Label_Short Field munkatetel.ido to "Idő"
+        Set Status_Help Field munkatetel.ido to "A munkavégzésre fordított idő órákban"
+        Set Field_Option Field munkatetel.ido DD_REQUIRED to True
+
+        Set Field_Label_Long Field munkatetel.menny to "Párok száma"
+        Set Field_Label_Short Field munkatetel.menny to "Menny."
+        Set Status_Help Field munkatetel.menny to "Elkészített cipő párok száma"
+        Set Field_Option Field munkatetel.menny DD_REQUIRED to True
+
+    End_Procedure
+
+    Procedure Update
+        Forward Send Update
+        Move (munkalap.raforditottIdo + munkatetel.ido) to munkalap.raforditottIdo
+        Move (munkalap.osszMenny + munkatetel.menny) to munkalap.osszMenny
+        
+        Clear havi
+        Move (String(DateGetYear(munkalap.datum))+String(DateGetMonth(munkalap.datum))) to havi.evho
+        Find eq havi by Index.1
+        Move (havi.osszMenny + munkatetel.menny) to havi.osszMenny
+        Move (havi.osszErtek + (munkatetel.menny*cipo.egysegar)) to havi.osszErtek
+        SaveRecord havi
+    End_Procedure
+
+    Procedure Backout
+        Forward Send Backout
+        Move (munkalap.raforditottIdo - munkatetel.ido) to munkalap.raforditottIdo
+        Move (munkalap.osszMenny - munkatetel.menny) to munkalap.osszMenny
+        
+        Clear havi
+        Move (String(DateGetYear(munkalap.datum))+String(DateGetMonth(munkalap.datum))) to havi.evho
+        Find eq havi by Index.1
+        Move (havi.osszMenny - munkatetel.menny) to havi.osszMenny
+        Move (havi.osszErtek - (munkatetel.menny*cipo.egysegar)) to havi.osszErtek
+        SaveRecord havi
+    End_Procedure
+
+    Function Validate_Save Returns Integer
+        Integer iRetVal
+        Forward Get Validate_Save to iRetVal
+        
+        If (not(iRetVal)) Begin
+            If (munkatetel.ido<0) Begin
+                Error 501 "A munkaidő nem lehet kevesebb mint 0!"
+                Move 501 to iRetVal
+            End
+            
+            If (munkatetel.menny<0) Begin
+                Error 502 "A mennyiség nem lehet kevesebb mint 0!"
+                Move 502 to iRetVal
+            End
+        End
+        
+        Function_Return iRetVal
+    End_Function
+
+End_Class

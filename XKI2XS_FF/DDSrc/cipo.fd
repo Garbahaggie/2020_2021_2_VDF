@@ -1,0 +1,5 @@
+#REPLACE FILE3 cipo
+#REPLACE cipo.Recnum |FN3,0
+#REPLACE cipo.cipoID |FN3,1
+#REPLACE cipo.nev |FS3,2
+#REPLACE cipo.egysegar |FN3,3

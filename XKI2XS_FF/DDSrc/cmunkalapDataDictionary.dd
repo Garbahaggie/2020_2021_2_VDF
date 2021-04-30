@@ -1,0 +1,83 @@
+﻿Use DataDict.pkg
+
+Open munkalap
+Open gyartosor
+Open dolgozok
+Open system
+
+Register_Object munkalap_sl
+
+Class cmunkalapDataDictionary is a DataDictionary
+    
+    Procedure Construct_Object
+        Forward Send Construct_Object
+        Set Main_File to munkalap.File_Number
+
+        Set Add_System_File to system.File_Number DD_Lock_On_All
+
+        Set Add_Server_File to gyartosor.File_Number
+        Set Add_Server_File to dolgozok.File_Number
+
+        Set Foreign_Field_Option DD_KEYFIELD DD_NOPUT to True
+        Set Foreign_Field_Option DD_KEYFIELD DD_FINDREQ to True
+        Set Foreign_Field_Option DD_INDEXFIELD DD_NOPUT to True
+        Set Foreign_Field_Option DD_DEFAULT DD_DISPLAYONLY to True
+
+        Set Field_Label_Long Field munkalap.munkalapID to "Munkalap Azonosító"
+        Set Field_Label_Short Field munkalap.munkalapID to "Azon."
+        Set Status_Help Field munkalap.munkalapID to "A munkalap azonosítója (automatikusan kiosztott)"
+        Set Key_Field_State Field munkalap.munkalapID to True
+        Set Field_Auto_Increment Field munkalap.munkalapID to File_Field system.munkalapID
+        Set Field_Prompt_Object Field munkalap.munkalapID to munkalap_sl
+
+        Set Field_Label_Long Field munkalap.gyartosorSorszam to "Gyártó sorszám"
+        Set Field_Label_Short Field munkalap.gyartosorSorszam to "Gy. Sorszám"
+        Set Status_Help Field munkalap.gyartosorSorszam to "Az elvégzett munkához használt gyártósór"
+        Set Field_Option Field munkalap.gyartosorSorszam DD_REQUIRED to True
+
+        Set Field_Label_Long Field munkalap.dolgozoID to "Dolgozó azonosító"
+        Set Field_Label_Short Field munkalap.dolgozoID to "Dolg. Azon."
+        Set Status_Help Field munkalap.dolgozoID to "A munkát végző alkalmazott azonosítója"
+        Set Field_Option Field munkalap.dolgozoID DD_REQUIRED to True
+
+        Set Field_Option Field munkalap.datum DD_REQUIRED to True
+        Set Field_Label_Long Field munkalap.datum to "Munkalap Dátum"
+        Set Field_Label_Short Field munkalap.datum to "Dátum"
+        Set Status_Help Field munkalap.datum to "A munkavégzés dátuma"
+
+        Set Field_Label_Long Field munkalap.raforditottIdo to "Ráfordított idő"
+        Set Field_Label_Short Field munkalap.raforditottIdo to "Idő"
+        Set Status_Help Field munkalap.raforditottIdo to "A munkavégzés időtartama"
+
+        Set Status_Help Field munkalap.osszMenny to "A munkavégzés alatt elkészült összes termék"
+        Set Field_Label_Long Field munkalap.osszMenny to "Összmennyiség"
+        Set Field_Label_Short Field munkalap.osszMenny to "Összmenny."
+
+    End_Procedure
+
+    Function Validate_Save Returns Integer
+        Integer iRetVal
+        Forward Get Validate_Save to iRetVal
+        
+        If (not(iRetVal)) Begin
+            Date dDat1 dDat2
+            Move (DateSet(2020,01,01)) to dDat1
+            Move (DateSet(2022,12,31)) to dDat2
+            If (munkalap.datum < dDat1) Begin
+                Error 503 "Túl régi dátum!"
+                Move 503 to iRetVal
+            End
+            If (munkalap.datum > dDat2) Begin
+                Error 504 "Túl nagy dátum!"
+                Move 504 to iRetVal
+            End
+        End
+        Function_Return iRetVal
+    End_Function
+
+End_Class
+
+#IFDEF Is$WebApp
+#ELSE
+Use munkalap.sl
+#ENDIF

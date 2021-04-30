@@ -1,0 +1,5 @@
+#REPLACE FILE7 havi
+#REPLACE havi.Recnum |FN7,0
+#REPLACE havi.evho |FS7,1
+#REPLACE havi.osszMenny |FN7,2
+#REPLACE havi.osszErtek |FN7,3

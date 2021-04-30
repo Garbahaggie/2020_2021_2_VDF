@@ -1,0 +1,3 @@
+dolgozoID
+nev
+szemelyi

@@ -1,0 +1,4 @@
+cipoID
+munkalapID
+ido
+menny

@@ -1,0 +1,5 @@
+#REPLACE FILE1 dolgozok
+#REPLACE dolgozok.Recnum |FN1,0
+#REPLACE dolgozok.dolgozoID |FN1,1
+#REPLACE dolgozok.nev |FS1,2
+#REPLACE dolgozok.szemelyi |FS1,3

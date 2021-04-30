@@ -1,0 +1,55 @@
+﻿Use DataDict.pkg
+
+Open gyartosor
+Open system
+Open munkalap
+
+Object oGyartosor_tipusVT is a DescriptionValidationTable
+    Procedure Fill_List
+        Forward Send Fill_List
+        Send Add_Table_Value "BOR" "Bőrcipőket készítő gyártósor"
+        Send Add_Table_Value "SZOVET" "Szövetcipőket készítő gyártósor"
+        Send Add_Table_Value "VASZON" "Vászoncipőket készítő gyártósor"
+        Send Add_Table_Value "MUBOR" "Műbőrcipőket készítő gyártósor"
+        Send Add_Table_Value "MŰANYAG" "Műanyag cipőket készítő gyártósor"
+    End_Procedure
+End_Object
+
+Register_Object gyartosor_sl
+
+Class cgyartosorDataDictionary is a DataDictionary
+    
+    Procedure Construct_Object
+        Forward Send Construct_Object
+        Set Main_File to gyartosor.File_Number
+
+        Set Add_Client_File to munkalap.File_Number
+
+        Set Add_System_File to system.File_Number DD_Lock_On_All
+
+        Set Foreign_Field_Option DD_KEYFIELD DD_NOPUT to True
+        Set Foreign_Field_Option DD_KEYFIELD DD_FINDREQ to True
+        Set Foreign_Field_Option DD_INDEXFIELD DD_NOPUT to True
+        Set Foreign_Field_Option DD_DEFAULT DD_DISPLAYONLY to True
+
+        Set Field_Label_Long Field gyartosor.gyartosorSorszam to "Gyártósor sorszám"
+        Set Field_Label_Short Field gyartosor.gyartosorSorszam to "Sorszám"
+        Set Status_Help Field gyartosor.gyartosorSorszam to "A gyártósor sorszáma"
+        Set Key_Field_State Field gyartosor.gyartosorSorszam to True
+        Set Field_Auto_Increment Field gyartosor.gyartosorSorszam to File_Field system.gyartosorSorszam
+        Set Field_Prompt_Object Field gyartosor.gyartosorSorszam to gyartosor_sl
+
+        Set Field_Label_Long Field gyartosor.tipus to "Gyártósor típus"
+        Set Field_Label_Short Field gyartosor.tipus to "Típus"
+        Set Status_Help Field gyartosor.tipus to "A gyártósor típusa"
+        Set Field_Class_Name Field gyartosor.tipus to "Combo"
+        Set Field_Value_Table Field gyartosor.tipus to oGyartosor_tipusVT
+
+    End_Procedure
+
+End_Class
+
+#IFDEF Is$WebApp
+#ELSE
+Use gyartosor.sl
+#ENDIF

@@ -1,0 +1,3 @@
+evho
+osszMenny
+osszErtek

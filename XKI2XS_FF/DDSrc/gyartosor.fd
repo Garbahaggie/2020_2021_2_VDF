@@ -1,0 +1,4 @@
+#REPLACE FILE4 gyartosor
+#REPLACE gyartosor.Recnum |FN4,0
+#REPLACE gyartosor.gyartosorSorszam |FN4,1
+#REPLACE gyartosor.tipus |FS4,2

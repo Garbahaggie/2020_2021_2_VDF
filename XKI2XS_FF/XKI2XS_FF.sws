@@ -1,0 +1,13 @@
+[Properties]
+Version=20.0
+[WorkspacePaths]
+ConfigFile=.\Programs\Config.ws
+[Preferences]
+DefaultFormHeight=12
+[Projects]
+Project0=Cipogyar_ff.src
+[Conditionals]
+Is$WebApp=False
+Is$Win64=True
+[Libraries]
+Lib1=..\Kolcsonzo_2021\Libraries\DataFlex Reports\20.0\DataFlex Reports.sws

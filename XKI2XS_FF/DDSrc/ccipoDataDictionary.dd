@@ -1,0 +1,47 @@
+﻿Use DataDict.pkg
+
+Open cipo
+Open system
+Open munkatetel
+
+Register_Object cipo_sl
+
+Class ccipoDataDictionary is a DataDictionary
+    
+    Procedure Construct_Object
+        Forward Send Construct_Object
+        Set Main_File to cipo.File_Number
+
+        Set Add_Client_File to munkatetel.File_Number
+
+        Set Add_System_File to system.File_Number DD_Lock_On_All
+
+        Set Foreign_Field_Option DD_KEYFIELD DD_NOPUT to True
+        Set Foreign_Field_Option DD_KEYFIELD DD_FINDREQ to True
+        Set Foreign_Field_Option DD_INDEXFIELD DD_NOPUT to True
+        Set Foreign_Field_Option DD_DEFAULT DD_DISPLAYONLY to True
+
+        Set Field_Label_Long Field cipo.cipoID to "Cipő azonosító"
+        Set Field_Label_Short Field cipo.cipoID to "Azon."
+        Set Status_Help Field cipo.cipoID to "Cipő azonosítója (automatikusan kiosztott)"
+        Set Key_Field_State Field cipo.cipoID to True
+        Set Field_Auto_Increment Field cipo.cipoID to File_Field system.cipoID
+        Set Field_Prompt_Object Field cipo.cipoID to cipo_sl
+
+        Set Field_Label_Long Field cipo.nev to "Cipő neve"
+        Set Field_Label_Short Field cipo.nev to "Név"
+        Set Status_Help Field cipo.nev to "A cipő neve"
+        Set Field_Option Field cipo.nev DD_REQUIRED to True
+
+        Set Field_Label_Long Field cipo.egysegar to "Cipő ára"
+        Set Field_Label_Short Field cipo.egysegar to "Ár"
+        Set Status_Help Field cipo.egysegar to "A cipő ára"
+
+    End_Procedure
+
+End_Class
+
+#IFDEF Is$WebApp
+#ELSE
+Use cipo.sl
+#ENDIF

@@ -1,0 +1,7 @@
+#REPLACE FILE2 system
+#REPLACE system.Recnum |FN2,0
+#REPLACE system.dolgozoID |FN2,1
+#REPLACE system.gyartosorSorszam |FN2,2
+#REPLACE system.cipoID |FN2,3
+#REPLACE system.munkatetelID |FS2,4
+#REPLACE system.munkalapID |FN2,5

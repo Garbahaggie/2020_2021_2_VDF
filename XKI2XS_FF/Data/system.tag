@@ -1,0 +1,5 @@
+dolgozoID
+gyartosorSorszam
+cipoID
+munkatetelID
+munkalapID

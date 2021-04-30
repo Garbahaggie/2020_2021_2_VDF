@@ -1,0 +1,50 @@
+﻿Use DataDict.pkg
+
+Open dolgozok
+Open system
+Open munkalap
+
+Register_Object dolgozok_sl
+
+Class cdolgozokDataDictionary is a DataDictionary
+    
+    Procedure Construct_Object
+        Forward Send Construct_Object
+        Set Main_File to dolgozok.File_Number
+
+        Set Add_Client_File to munkalap.File_Number
+
+        Set Add_System_File to system.File_Number DD_Lock_On_All
+
+        Set Foreign_Field_Option DD_KEYFIELD DD_NOPUT to True
+        Set Foreign_Field_Option DD_KEYFIELD DD_FINDREQ to True
+        Set Foreign_Field_Option DD_INDEXFIELD DD_NOPUT to True
+        Set Foreign_Field_Option DD_DEFAULT DD_DISPLAYONLY to True
+
+        Set Field_Label_Long Field dolgozok.dolgozoID to "Azonosító"
+        Set Field_Label_Short Field dolgozok.dolgozoID to "Azon."
+        Set Status_Help Field dolgozok.dolgozoID to "Egy alkalmazott azonosítója (automatikusan kiosztott)"
+        Set Key_Field_State Field dolgozok.dolgozoID to True
+        Set Field_Auto_Increment Field dolgozok.dolgozoID to File_Field system.dolgozoID
+        Set Field_Prompt_Object Field dolgozok.dolgozoID to dolgozok_sl
+
+        Set Field_Label_Long Field dolgozok.nev to "Dolgozó neve"
+        Set Field_Label_Short Field dolgozok.nev to "Név"
+        Set Status_Help Field dolgozok.nev to "Az alkalmazott neve"
+        Set Field_Option Field dolgozok.nev DD_REQUIRED to True
+        Set Field_Prompt_Object Field dolgozok.nev to dolgozok_sl
+
+        Set Field_Label_Long Field dolgozok.szemelyi to "Dolgozó személyi száma"
+        Set Field_Label_Short Field dolgozok.szemelyi to "Személyi"
+        Set Status_Help Field dolgozok.szemelyi to "Alkalmazott személyi igazolvány száma"
+        Set Field_Option Field dolgozok.szemelyi DD_REQUIRED to True
+        Set Field_Option Field dolgozok.szemelyi DD_CAPSLOCK to True
+
+    End_Procedure
+
+End_Class
+
+#IFDEF Is$WebApp
+#ELSE
+Use dolgozok.sl
+#ENDIF

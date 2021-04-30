@@ -1,0 +1,8 @@
+#REPLACE FILE5 munkalap
+#REPLACE munkalap.Recnum |FN5,0
+#REPLACE munkalap.munkalapID |FN5,1
+#REPLACE munkalap.gyartosorSorszam |FN5,2
+#REPLACE munkalap.dolgozoID |FN5,3
+#REPLACE munkalap.datum |FD5,4
+#REPLACE munkalap.raforditottIdo |FN5,5
+#REPLACE munkalap.osszMenny |FN5,6
