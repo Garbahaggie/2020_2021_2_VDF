@@ -6,11 +6,11 @@
 }
 
 #OWEBAPP.Df_Flat_Desktop .RWRunReportButton .WebItm_Icon:before{
-  content: "j";
+  content: "g";
 }
 
 #OWEBAPP.Df_Flat_Desktop .RWPrintReportButton .WebItm_Icon:before{
-  content: "e";
+  content: "d";
 }
 
 /* SORT & ORDER */
@@ -48,11 +48,11 @@
 }
 
 #OWEBAPP.Df_Flat_Desktop .RWMoveSortOrderUp button:before {
-  content: "d";
+  content: "e";
 }
 
 #OWEBAPP.Df_Flat_Desktop .RWMoveSortOrderDown button:before {
-  content: "c";
+  content: "f";
 }
 
 /* FONT LOADING */

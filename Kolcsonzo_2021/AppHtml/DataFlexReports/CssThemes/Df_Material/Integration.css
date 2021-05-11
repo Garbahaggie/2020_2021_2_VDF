@@ -6,11 +6,11 @@
 }
 
 #OWEBAPP.Df_Material .RWRunReportButton .WebItm_Icon:before{
-  content: "j";
+  content: "g";
 }
 
 #OWEBAPP.Df_Material .RWPrintReportButton .WebItm_Icon:before{
-  content: "e";
+  content: "d";
 }
 
 /* SORT & ORDER */
@@ -48,11 +48,11 @@
 }
 
 #OWEBAPP.Df_Material .RWMoveSortOrderUp button:before {
-  content: "d";
+  content: "e";
 }
 
 #OWEBAPP.Df_Material .RWMoveSortOrderDown button:before {
-  content: "c";
+  content: "f";
 }
 
 /* FONT LOADING */

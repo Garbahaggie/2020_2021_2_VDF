@@ -77,23 +77,23 @@
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_PrintButton:before{
-  content: "N";
+  content: "d";
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_PreviousButton:before{ 
-  content: "L";
+  content: "e";
   padding: 2px 3px;
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_NextButton:before{
-  content: "M";
+  content: "f";
   padding: 4px 3px;
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_ZoomInButton:before{
-  content: "H";
+  content: "b";
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_ZoomOutButton:before{
-  content: "G";
+  content: "c";
 }

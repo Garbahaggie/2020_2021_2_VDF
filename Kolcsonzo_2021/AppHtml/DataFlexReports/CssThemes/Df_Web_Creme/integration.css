@@ -1,12 +1,12 @@
 /* ICONS */
 #OWEBAPP.Df_Web_Creme .RWRunReportButton .WebItm_Icon:before{
-  content: "j";
+  content: "g";
   font-size: 22px;
   padding: 1px 0px 0px 2px;
 }
 
 #OWEBAPP.Df_Web_Creme .RWPrintReportButton .WebItm_Icon:before{
-  content: "e";
+  content: "d";
   font-size: 22px;
   padding: 4px;
 }
@@ -51,11 +51,11 @@
 }
 
 #OWEBAPP.Df_Web_Creme .RWMoveSortOrderUp button:before {
-  content: "d";
+  content: "e";
 }
 
 #OWEBAPP.Df_Web_Creme .RWMoveSortOrderDown button:before {
-  content: "c";
+  content: "f";
 }
 
 /* FONT LOADING */

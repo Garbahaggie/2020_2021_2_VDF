@@ -77,21 +77,21 @@
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_PrintButton:before{ 
-  content: "o";
+  content: "d";
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_PreviousButton:before{ 
-  content: "v";
+  content: "e";
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_NextButton:before{
-  content: "w";
+  content: "f";
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_ZoomInButton:before{
-  content: "H";
+  content: "b";
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_ZoomOutButton:before{
-  content: "G";
+  content: "c";
 }

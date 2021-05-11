@@ -6,11 +6,11 @@
 }
 
 #OWEBAPP.Df_Modern_Sky .RWRunReportButton .WebItm_Icon:before{
-  content: "t";
+  content: "g";
 }
 
 #OWEBAPP.Df_Modern_Sky .RWPrintReportButton .WebItm_Icon:before{
-  content: "z";
+  content: "d";
 }
 
 /* STYLES SORT & ORDER */
@@ -33,11 +33,11 @@
 }
 
 #OWEBAPP.Df_Modern_Sky .RWMoveSortOrderUp button:before {
-  content: "d";
+  content: "e";
 }
 
 #OWEBAPP.Df_Modern_Sky .RWMoveSortOrderDown button:before {
-  content: "c";
+  content: "f";
 }
 
 /* STYLES FONT LOADING */

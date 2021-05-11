@@ -79,26 +79,26 @@
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_PrintButton:before{ 
-  content: "o";
+  content: "d";
   padding: 3px;
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_PreviousButton:before{ 
-  content: "v";
+  content: "e";
   padding: 3px 0px 0px 2px;
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_NextButton:before{
-  content: "w";
+  content: "f";
   padding: 3px;
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_ZoomInButton:before{
-  content: "H";
+  content: "b";
   padding: 3px;
 }
 
 .DR_Toolbar .DR_Inner .DR_Wrapper .DR_ZoomOutButton:before{
-  content: "G";
+  content: "c";
   padding: 3px;
 }
