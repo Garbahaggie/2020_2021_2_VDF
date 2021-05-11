@@ -63,6 +63,39 @@ Object oWebApp is a cWebApp
                             Send NavigatePath
                         End_Procedure
                     End_Object
+
+                    Object oMdikkeresseItem1 is a cWebMenuItem
+                        Set psCaption to "Médiák keresése"
+
+                        WebRegisterPath ntNavigateBegin oSelectMedia
+
+                        Procedure OnClick
+                            Forward Send OnClick
+                            Send NavigatePath
+                        End_Procedure
+                    End_Object
+
+                    Object oBrlkkeresseItem1 is a cWebMenuItem
+                        Set psCaption to "Bérlők keresése"
+
+                        WebRegisterPath ntNavigateBegin oSelectBerlok
+
+                        Procedure OnClick
+                            Forward Send OnClick
+                            Send NavigatePath
+                        End_Procedure
+                    End_Object
+
+                    Object oKlcsnzsilapokkeresseItem1 is a cWebMenuItem
+                        Set psCaption to "Kölcsönzési lapok keresése"
+
+                        WebRegisterPath ntNavigateBegin oSelectLap
+
+                        Procedure OnClick
+                            Forward Send OnClick
+                            Send NavigatePath
+                        End_Procedure
+                    End_Object
                 End_Object
 
                 Object oSignOut_itm is a cWebMenuItem
@@ -148,6 +181,12 @@ Object oWebApp is a cWebApp
     Use SelectEmber.wo
     Use ZoomMediaTetel.wo
     Use ZoomMedia.wo
+    Use SelectMedia.wo
+    Use ZoomBerlo.wo
+    Use SelectBerlok.wo
+    Use ZoomLaptetel.wo
+    Use ZoomKolcsonzesiLap.wo
+    Use SelectLap.wo
     Set phoDefaultView to oDashboard
 
 End_Object

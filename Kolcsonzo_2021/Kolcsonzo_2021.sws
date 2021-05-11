@@ -5,9 +5,11 @@ ConfigFile=.\Programs\Config.ws
 [Preferences]
 DefaultFormHeight=12
 [Conditionals]
-Is$WebApp=False
+Is$WebApp=True
 Is$Win64=True
 [Libraries]
 Lib1=Libraries\DataFlex Reports\20.0\DataFlex Reports.sws
 [Projects]
 Project0=Kolcsonzo.src
+Project1=WebApp.src
+Project2=WebApp_desktop.src

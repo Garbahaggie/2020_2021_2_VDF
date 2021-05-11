@@ -89,21 +89,25 @@ Class clapDataDictionary is a DataDictionary
         If (not(iRetVal)) Begin
             If (lap.status eq "1") Begin
                 If (lap.kezdat eq "") Begin
-                    Error 503 "Kezdés dátumát meg kell adni!"
+                    Send UserError "Kezdés dátumát meg kell adni!" "Mentési hiba"
+                    //Error 503 "Kezdés dátumát meg kell adni!"
                     Move 503 to iRetVal
                 End
                 If (lap.kiado eq "") Begin
-                    Error 504 "Kiadót meg kell adni!"
+                    Send UserError "Kiadót meg kell adni!" "Mentési hiba"
+                    //Error 504 "Kiadót meg kell adni!"
                     Move 504 to iRetVal
                 End
             End
             If (lap.status eq "2") Begin
                 If (lap.vegdat eq "") Begin
-                    Error 505 "Vége dátumát meg kell adni!"
+                    Send UserError "Végzés dátumát meg kell adni!" "Mentési hiba"
+                    //Error 505 "Vége dátumát meg kell adni!"
                     Move 505 to iRetVal
                 End
                 If (lap.beveno eq "") Begin
-                    Error 506 "Bevevït meg kell adni!"
+                    Send UserError "Bevevőt meg kell adni!" "Mentési hiba"
+                    //Error 506 "Bevevït meg kell adni!"
                     Move 506 to iRetVal
                 End
             End
